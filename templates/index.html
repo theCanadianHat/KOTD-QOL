@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KickOpenTheDoor QOL</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+<div class="layout">
+    <aside class="sidebar">
+        <!-- Filters, links, stats -->
+    </aside>
+    <main class="content">
+        <h1>Active Bosses</h1>
+        <ul class="boss-list">
+            {% for boss in bosses %}
+            <li class="boss-card">
+                <a href="{{ boss.url }}" target="_blank" class="boss-title">{{ boss.title }}</a>
+                <div class="boss-meta">
+                    <span class="boss-health">{{ boss.health or '?' }} HP</span>-
+                    <span class="boss-stars">{% for _ in range(boss.stars or 0) %}★{% endfor %}</span>-
+                    <span class="boss-date">🕒 {{ boss.created_utc | datetimeformat }}</span>
+                </div>
+                {% if boss.imageUrl %}
+                <img src="{{boss.imageUrl}}" alt="Boss Image" class="boss-image">
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>    </main>
+</div>
+</body>
+</html>
