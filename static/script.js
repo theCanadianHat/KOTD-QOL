@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    fetch("/api/bosses")
+    fetch("/")
         .then(res => res.json())
         .then(data => {
             const list = document.getElementById("boss-list");
