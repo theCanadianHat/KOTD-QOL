@@ -1,0 +1,39 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Flask environment
+instance/
+.env
+*.env
+*.secret
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Logs and dumps
+*.log
+*.dump
+*.sqlite3
+*.jsonl
+reddit_dump_*.json
+
+# Python virtual environments
+venv/
+env/
+.venv/
+
+# IDE/editor files
+.vscode/
+.idea/
+*.swp
+
+# Deployment
+*.egg-info/
+dist/
+build/
+
+# Node (if you add frontend tooling later)
+node_modules/
