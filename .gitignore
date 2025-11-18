@@ -28,6 +28,7 @@ env/
 # IDE/editor files
 .vscode/
 .idea/
+*.iml
 *.swp
 
 # Deployment
