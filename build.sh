@@ -15,8 +15,7 @@ elif [ -d "venv/bin" ]; then
     source venv/bin/activate
     PIP_PATH="venv/bin/python -m pip"
 else
-    echo "No valid virtual environment found."
-    exit 1
+    PIP_PATH="pip"
 fi
 
 $PIP_PATH install -r requirements.txt
