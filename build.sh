@@ -1,5 +1,5 @@
 #!/bin/bash
-git fetch
+git fetch --unshallow --tags || git fetch --tags
 tag=$(git describe --tag --abbrev=0)
 echo "${tag}" > version.txt
 hash=$(git rev-parse HEAD)
