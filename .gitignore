@@ -18,7 +18,7 @@ Thumbs.db
 *.dump
 *.sqlite3
 *.jsonl
-reddit_dump_*.json
+reddit*_dump_*.json
 
 # Python virtual environments
 venv/

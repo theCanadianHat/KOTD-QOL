@@ -1,8 +1,9 @@
+import logging
 from datetime import datetime, timezone
 
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 
-from reddit import get_active_bosses
+from reddit import get_active_bosses, get_boss_stats
 
 app = Flask(__name__)
 
@@ -11,6 +12,7 @@ app = Flask(__name__)
 def datetimeformat(value):
     dt = datetime.fromtimestamp(value, tz=timezone.utc)
     return dt.strftime('%Y-%m-%d %H:%M UTC')
+
 
 def get_version():
     try:
@@ -24,11 +26,19 @@ def get_version():
     except:
         return "dev"
 
+
 @app.route('/')
 def index():
     data = get_active_bosses()
     version = get_version()
-    return render_template('index.html',bosses=data, version=version)
+    return render_template('index.html', bosses=data, version=version)
+
+
+@app.route('/api/stats/<post_url>', methods=['GET'])
+def boss_stats(post_url):
+    logging.debug(post_url)
+    return jsonify({'response size': get_boss_stats(post_url)})
+
 
 if __name__ == '__main__':
     app.run(debug=True)

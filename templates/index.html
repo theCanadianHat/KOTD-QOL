@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>KickOpenTheDoor QOL</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
@@ -15,27 +15,59 @@
             <li><a href="{{ url_for('index') }}">Inventory</a></li>
             <li><a href="{{ url_for('index') }}">Profile</a></li>
         </ul>
+        <div class="sidebar-footer">
+            <p>Version {{ version }}</p>
+        </div>
     </aside>
     <main class="content">
         <h1>Active Bosses</h1>
         <ul class="boss-list">
             {% for boss in bosses %}
             <li class="boss-card">
-                <a href="{{ boss.url }}" target="_blank" class="boss-title">{{ boss.title }}</a>
-                <div class="boss-meta">
-                    <span class="boss-health">{{ boss.health or '?' }} HP</span>-
-                    <span class="boss-stars">{% for _ in range(boss.stars or 0) %}★{% endfor %}</span>-
-                    <span class="boss-date">🕒 {{ boss.created_utc | datetimeformat }}</span>
+                <div class="card-title">
+                    <a href="{{ boss.url }}" target="_blank" class="boss-title">{{ boss.title }}</a>
+                    <div class="boss-meta">
+                        <span class="boss-type">{{ boss.attackType or '?' }}</span>-
+                        <span class="boss-health">{{ boss.health or '?' }} HP</span>-
+                        <span class="boss-stars">{% for _ in range(boss.stars or 0) %}★{% endfor %}</span>-
+                        <span class="boss-date">🕒 {{ boss.created_utc | datetimeformat }}</span>
+                    </div>
                 </div>
-                {% if boss.imageUrl %}
-                <img src="{{boss.imageUrl}}" alt="Boss Image" class="boss-image">
-                {% endif %}
+                <div class="card-body">
+                    {% if boss.imageUrl %}
+                    <div class="boss-image">
+                        <img src="{{boss.imageUrl}}" alt="Boss Image" class="boss-image">
+                    </div>
+                    {% endif %}
+                    <div class="boss-stats">
+                        <button data-url="{{url_for('boss_stats',post_url=boss.url)}}" onclick="get_boss_stats(this)">
+                            Sync
+                        </button>
+                        <table>
+                            <tr>
+                                <th>Stat</th>
+                                <th>Value</th>
+                            </tr>
+                            <tr>
+                                <td>Players Attacked</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>Scouted Weakness</td>
+                                <td>0</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+
             </li>
             {% endfor %}
-        </ul>    </main>
+        </ul>
+    </main>
 </div>
 <footer class="app-footer">
-    <p>Version {{ version }}</p>
+
 </footer>
 </body>
 </html>
