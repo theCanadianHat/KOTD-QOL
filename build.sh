@@ -6,4 +6,17 @@ echo "${buildTime}" >> version.txt
 echo "Build Info:"
 echo -e "\tCommit Hash: ${hash}"
 echo -e "\tBuild Time: ${buildTime}"
-./venv/Scripts/pip.exe install -r requirements.txt
+
+
+if [ -d "venv/Scripts" ]; then
+    source venv/Scripts/activate
+    PIP_PATH="venv/Scripts/python.exe -m pip"
+elif [ -d "venv/bin" ]; then
+    source venv/bin/activate
+    PIP_PATH="venv/bin/python -m pip"
+else
+    echo "No valid virtual environment found."
+    exit 1
+fi
+
+$PIP_PATH install -r requirements.txt
