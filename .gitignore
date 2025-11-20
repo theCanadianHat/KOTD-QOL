@@ -35,6 +35,7 @@ env/
 *.egg-info/
 dist/
 build/
+version.txt
 
 # Node (if you add frontend tooling later)
 node_modules/
